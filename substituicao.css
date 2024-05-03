@@ -1,0 +1,143 @@
+
+.caixas_t_w {
+  width: 210px; /* Largura original */
+  margin-left: 160px;
+  user-select: none; /* Desativando a seleção de texto */
+  margin-left: 107px;
+  margin-top: -7px;
+  position: absolute;
+  display: none; /* Inicia escondido */
+  overflow: hidden; /* Previne que o conteúdo ultrapasse os limites durante a animação */
+  transform-origin: top center; /* Ajusta a origem da transformação para o topo central */
+}
+
+
+/* Estiliza o placeholder */
+.caixas_t_w input[type="number"]::placeholder {
+  font-size: 70%; /* Tamanho da fonte do placeholder */
+  opacity: 0.4; /* Define a opacidade do placeholder */
+  color: #555; /* Define a cor do placeholder */
+}
+
+
+/* Centraliza o texto digitado */
+.caixas_t_w input[type="number"] {
+  text-align: center !important; /* !important garante que essa propriedade será aplicada */
+}
+
+/* Remove a barra de rotação dos campos de número */
+.caixas_t_w input[type="number"]::-webkit-inner-spin-button,
+.caixas_t_w input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.caixas_t_w .caixaTexto {
+  width: 20px; /* Mantendo o tamanho original */
+  border: 1px solid #ccc; /* Adicionando uma borda sólida */
+  border-radius: 3px; /* Adicionando bordas arredondadas */
+  text-align: center; /* Centralizando o texto */
+  padding: 1px; /* Adicionando preenchimento interno */
+  height: 20px;
+  padding-top: 0;
+}
+
+
+
+.caixaTexto:focus {
+  outline: none; /* Remover a borda de foco */
+  border: 1px solid #ccc; /* Adicionar uma borda cinza */
+  background-color: #f0f0f0; /* Mudar a cor de fundo para um cinza claro */
+  color: #333; /* Mudar a cor do texto para um tom mais escuro */
+}
+
+
+
+#openCaixas:focus {
+  outline: none; /* Remover a borda de foco */
+}
+
+#openCaixas {
+
+  margin-left: 120px;
+margin-left: 155px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  width: 45px;
+  height: 49px;
+  border: none;
+}
+
+
+#openCaixas img {
+  width: 100%;
+  height: auto;
+  transition: transform 0.2s ease; /* Adicionando transição para suavizar o efeito de hover */
+}
+
+#openCaixas img:hover {
+  filter: brightness(85%); /* Reduzindo o brilho do ícone em hover para alterar a cor */
+  transform: scale(1.1); /* Aumentando ligeiramente o tamanho do ícone quando em hover */
+}
+
+#substituicao {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  width: 45px;
+  height: 49px;
+  border: none;
+float: right;
+margin-right: 30px;
+}
+
+#substituicao img {
+  width: 100%;
+  height: auto;
+  transition: transform 0.2s ease; /* Adicionando transição para suavizar o efeito de hover */
+}
+#substituicao img:hover {
+  filter: brightness(85%); /* Reduzindo o brilho do ícone em hover para alterar a cor */
+  transform: scale(1.1); /* Aumentando ligeiramente o tamanho do ícone quando em hover */
+}
+
+#substituicao:focus {
+  outline: none; /* Remover a borda de foco */
+  }
+
+
+  .substituicao_palavras{
+    float: right;
+    margin-top: 8px;
+    }
+
+    #substituicao_palavras {
+      display: none;
+      opacity: 0;
+      transform: translateY(-20px);
+      transition: opacity 0.5s, transform 0.5s;
+  }
+  
+  #substituicao_palavras.visible {
+      display: block;
+      opacity: 1;
+      transform: translateY(0px);
+      margin-bottom: 10px;
+  }
+
+  
+  #substituir {
+    padding: 6px 12px;
+    border-radius: 4px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+
+
+
+

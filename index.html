@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ContratoFast</title>
+    <!-- Inclui o CSS do Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="substituicao.css">
+    <link rel="stylesheet" href="variaveis.css">
+    
+</head>
+<body>
+    <div class="topo">
+    <div class="flipswitch">
+        <input checked="" id="fs" class="flipswitch-cb" name="flipswitch" type="checkbox">
+        <label for="fs" class="flipswitch-label">
+            <div class="flipswitch-inner"></div>
+            <div class="flipswitch-switch"></div>
+        </label>
+    </div>
+
+
+    <button id="openCaixas">
+        <img src="img/caixas.png" alt="caixas">
+    </button>
+    <div class="caixas_t_w" id="caixas_t_w" style="display: none;">
+        <div class="conteudo">
+            <input type="number" class="caixaTexto" id="caixaTextoN" placeholder="N">
+            <input type="number" class="caixaTexto" id="caixaTextoM" placeholder="M">
+            <input type="number" class="caixaTexto" id="caixaTextoP" placeholder="P">
+            <input type="number" class="caixaTexto" id="caixaTextoO" placeholder="O">
+            <input type="number" class="caixaTexto" id="caixaTextoI" placeholder="I">
+            <input type="number" class="caixaTexto" id="caixaTextoG" placeholder="G">
+        </div>
+    </div>
+
+
+    <button id="openWindowBtn">
+        <img src="img/dividir.png" alt="Ícone de dividir tela">
+    </button>
+
+    
+    <button id="substituicao">
+        <img src="img/substituir.png" alt="Ícone de Substituição">
+    </button>
+  
+    
+    <div id="substituicao_palavras" class="substituicao_palavras" style="display:none;">
+        <input type="text" id="palavra_antiga" class="input-field" placeholder="Palavra antiga">
+        <input type="text" id="palavra_nova" class="input-field" placeholder="Palavra nova">
+        <button id="limpar_campos" class="texto-interativo" style="display: block; margin-top: 0px; font-size: 12px; color: #666; cursor: pointer; border: none; background: none; position: absolute; right: 90px;">Limpar</button>
+        <button id="substituir">Substituir</button>
+    </div>
+    </div>
+    <div class="container_main">
+        <div class="variaveis" >
+    
+
+            <div class="search-container">
+                <div id="searchInput" contenteditable="true" data-placeholder="Pesquisar..." oninput="highlightTags()" oninput="highlightLimpar()""></div>
+                <span class="clearSearch" onclick="clearSearch()">Limpar</span> <!-- Texto como botão para limpar o campo de texto -->
+                <div id="imagemNaoEncontrado" style="display: none;">
+                    <img src="img/imagem-nao-encontrado.gif" alt="Não Encontrado">
+                </div>
+            </div>
+          
+  
+            
+
+                <div id="lista-variaveis" class="dv-lista-variaveis">
+                    <!-- Itens da lista de variáveis serão adicionados dinamicamente aqui -->
+                </div>
+
+        </div>
+
+<div class="editord">
+            <textarea id="myTextarea" class="editor"></textarea>
+        </div>
+        
+
+</div>
+
+
+<div class="textareaRascunho" style="display: none;">
+    <button class="toggle-button" onclick="toggleTextarea()">Rascunho</button>
+    <textarea id="myRascunho" placeholder="Digite seu rascunho aqui..." style="display: none;" oninput="toggleClearTextVisibility()"></textarea>
+    <div class="resizerRascunho" id="resizerRascunho" onmousedown="initDrag(event)"></div>
+    <div class="copy-message" id="copyMessage"></div>
+    <button class="copy-button" onclick="copyText()">&#x1F4CB;</button> <!-- Ícone de clipboard -->
+<span class="clearRascunho" onclick="clearRascunho()" style="display: none;">Limpar</span> <!-- Texto como botão para limpar o campo de texto -->
+</div>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" />
+    <script src="https://cdn.jsdelivr.net/npm/interactjs@1.10.11/dist/interact.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src='js/tinymce/tinymce.min.js' referrerpolicy="origin"> </script>
+    <script src="script.js"></script>
+    <script src="substituicao.js"></script>
+
+    <script>
+$(document).ready(function() {
+    // Inicializa o TinyMCE
+    tinymce.init({
+        selector: '#myTextarea',
+        license_key: 'gpl',
+        language: 'pt_BR',
+        toolbar: 'undo redo | formatselect | bold italic underline | forecolor backcolor | lineheight | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | copyhtml updateContent',
+        setup: function(editor) {
+            // Botão para copiar HTML
+            editor.ui.registry.addButton('copyhtml', {
+                text: 'Copiar HTML para o CV',
+                onAction: function() {
+                    var html = editor.getContent();
+                    copyToClipboard(html);
+                }
+            });
+
+            // Botão para atualizar o conteúdo baseado no estado do switch
+            editor.ui.registry.addButton('updateContent', {
+                text: 'Converter variáveis',
+                onAction: function() {
+                    var isChecked = $('#fs').is(':checked');
+                    updateTextareaContent(isChecked);
+                }
+            });
+        }
+    });
+
+    // Função para copiar texto para a área de transferência
+    function copyToClipboard(text) {
+        navigator.clipboard.writeText(text).then(function() {
+            alert("HTML copiado para a área de transferência!");
+        }).catch(function(err) {
+            console.error('Erro ao copiar HTML: ', err);
+        });
+    }
+
+    // Listener para o switch externo
+    $('#fs').change(function() {
+        var isChecked = $(this).is(':checked');
+        updateTextareaContent(isChecked);
+    });
+});
+
+    </script>
+</body>
+</html>
+

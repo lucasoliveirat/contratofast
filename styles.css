@@ -1,0 +1,561 @@
+body {
+    padding: 10px;
+    background-color: #f8f8f8 !important;
+   
+}
+
+
+#openWindowBtn {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    margin-right: 15px;
+    margin-left: auto;
+    float: right;
+    position: relative;
+}
+
+.variaveis {
+  /* display: grid; */
+  grid-template-columns: 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas: ".";
+  grid-area: variaveis;
+  width: 405px; 
+  float: left;
+  margin-right: 10px;
+  /*overflow: auto;  /* Adiciona overflow diferente de 'visible' */
+  /*resize: horizontal;  /* Permite redimensionar horizontalmente */
+ /* min-width: 340px;  /*Define uma largura mínima de 320px */
+  /* max-width: 750px;  /*Define uma largura máxima de 750px */
+}
+
+
+
+
+#openWindowBtn {
+  outline: none; /* Remover a borda de foco */
+}
+
+
+#openWindowBtn img {
+    width: 100%;
+    transition: transform 0.2s ease; /* Adicionando transição para suavizar o efeito de hover */
+    margin-top: 0;
+}
+
+#openWindowBtn img:hover {
+    filter: brightness(85%); /* Reduzindo o brilho do ícone em hover para alterar a cor */
+    transform: scale(1.1); /* Aumentando ligeiramente o tamanho do ícone quando em hover */
+}
+
+
+.flipswitch {
+    position: absolute;
+    width: 100px;
+    margin-top: 10px;
+    margin-left: 20px;
+  }
+  
+  .flipswitch input[type=checkbox] {
+    display: none;
+  }
+  
+  .flipswitch-label {
+    display: block;
+    overflow: hidden;
+    cursor: pointer;
+    border: 1px solid #999999;
+    border-radius: 8px;
+  }
+  
+  .flipswitch-inner {
+    width: 200%;
+    margin-left: -100%;
+    transition: margin 0.3s ease-in 0s;
+  }
+  
+  .flipswitch-inner:before, .flipswitch-inner:after {
+    float: left;
+    width: 50%;
+    height: 24px;
+    padding: 0;
+    line-height: 24px;
+    font-size: 18px;
+    color: white;
+    font-family: Trebuchet, Arial, sans-serif;
+    font-weight: bold;
+    box-sizing: border-box;
+  }
+  
+  .flipswitch-inner:before {
+    content: "TEXTO";
+    padding-left: 7px;
+    background-color: #EBEBEB;
+    color: #888888;
+  }
+  
+  .flipswitch-inner:after {
+    content: "WORD";
+    background-color: #256799;
+    color: #FFFFFF;
+    text-align: right;
+    padding-right: 6px;
+  }
+  
+  .flipswitch-switch {
+    width: 31px;
+    margin: -3.5px;
+    background: #FFFFFF;
+    border: 1px solid #999999;
+    border-radius: 8px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    transition: all 0.3s ease-in 0s;
+    height: 32px;
+  }
+  
+  .flipswitch-cb:checked + .flipswitch-label .flipswitch-inner {
+    margin-left: 0;
+  }
+  
+  .flipswitch-cb:checked + .flipswitch-label .flipswitch-switch {
+    right: 0;
+  }
+
+.summary-subcategoria {
+    background-color: #f0f0f0; /* Altere a cor de fundo conforme necessário */
+    color: #333; /* Altere a cor do texto conforme necessário */
+    width: fit-content;
+    /* Adicione outros estilos conforme necessário */
+    cursor: pointer;
+    margin-bottom: 6px;
+    font-family: 'SF Pro Text', sans-serif;
+    font-weight: bold;
+    font-size: 13px;
+    margin-left: 20px;
+}
+
+
+.container_main {
+  /* display: grid; */
+  grid-template-columns: 0.2fr 1.4fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas: "variaveis editor";
+  position: relative;
+}
+  
+.topo { 
+  height: 70px;
+  width: 100%;
+  position: relative; /* Mantém a div no topo da janela de visualização */
+}
+
+  
+
+.editor {
+  position: relative;
+  width: auto;
+  height: 600px;
+  margin-left: 8px;
+}
+
+.info-icon-container {
+  position: absolute; /* Define a posição absoluta para o ícone container */
+  left: -20px; /* Posiciona o container do ícone 8px à esquerda do item da lista */
+  top: 0; /* Alinha o container do ícone verticalmente com o item da lista */
+}
+
+
+
+
+
+.hover-content {
+  display: none;
+  position: fixed;
+  background-color: rgb(215, 219, 213);
+  padding: 10px;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1 !important;
+  border-radius: 10px; /* ajuste o valor conforme necessário */
+  padding-bottom: 5;
+  padding-top: 5;
+  width: 800px;
+}
+
+.hover-content p {
+ margin-bottom: 2px;
+}
+
+
+.hover-content img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+
+/* ANIMAÇÃO PARA O ITEM COPIADO */
+@keyframes tremor {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-2px); }
+  50% { transform: translateX(2px); }
+  75% { transform: translateX(-2px); }
+  100% { transform: translateX(0); }
+}
+
+.ul-lista-variaveis li.copiado .nome-variavel {
+  color: rgb(44, 117, 228);
+  animation: tremor 0.5s infinite !important; /* Adicionando !important para garantir prioridade */
+  display: inline-block; /* Garante que a animação funcione corretamente */
+
+}
+
+
+
+
+.tabela > span:not(.info-icon-container) {
+  margin-bottom: 0px;
+  border: 2px solid #d6d1d1;
+}
+
+
+/* Adicione uma classe específica para a regra que deseja sobrepor */
+.ul-lista-variaveis li.ta span {
+  color: #4CAF50; /* Sua cor desejada */
+}
+
+
+/* Adicione uma classe específica para a regra que deseja sobrepor */
+.ul-lista-variaveis li.bc span {
+  color: #4c5baf; /* Sua cor desejada */
+}
+
+.fas.fa-info-circle {
+  font-size: 13px; /* Altere o tamanho conforme desejado */
+}
+
+
+  
+  #limpar_campos.clicked {
+    color: green; /* Altera a cor do texto para verde ao ser clicado */
+}
+
+
+    .input-field {
+      padding: 6px;
+      margin-right: 6px;
+      border-radius: 4px;
+      border: 2px solid #ccc;
+      font-size: 14px;
+      outline: none;
+  }
+  
+  .input-field:focus {
+      border: 2px solid #4CAF50;
+  }
+  
+  @keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(5px); }
+    50% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+    100% { transform: translateX(0); }
+}
+
+.input-field.shake {
+    animation: shake 0.5s;
+    border: 2px solid red; /* Adicionando a borda vermelha */
+}
+
+  
+.textareaRascunho {
+  position: fixed;
+  bottom: 3px;
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  overflow: hidden;
+  display: flex;
+  left: 28px;
+  flex-direction: column;
+  align-items: flex-end;
+
+}
+    textarea {
+        width: 250px;
+        padding: 5px 30px 5px 5px; /* Padding direito maior para acomodar o botão de copiar */
+        border: none;
+        resize: none !important;
+    }
+
+  
+    #myRascunho {
+      font-size: 11px; /* Defina o tamanho da fonte desejado aqui */
+  }
+  
+	
+#myRascunho:focus {
+  outline: none; /* Remover a borda de foco */
+}
+	
+    .resizerRascunho {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 10px;
+        height: 10px;
+        background-color: #ffffff;
+        cursor: ne-resize;
+        display: none;
+    }
+    .toggle-button {
+        width: 100%;
+
+        background-color: #e0a606;
+        color: white;
+        border: none;
+        cursor: pointer;
+        text-align: center;
+        user-select: none;
+    }
+
+
+    .toggle-button:focus {
+      outline: none; /* Remover a borda de foco */
+  }
+
+    .copy-button {
+        width: 20px;
+        height: 20px;
+        background-color: transparent;
+        color: white;
+        border: none;
+        cursor: pointer;
+        font-size: 12px;
+        display: none;
+        margin-right: 5px;
+        border-radius: 50%;
+        float: right;
+    }
+.copy-message {
+    color: green;
+    background-color: white;
+    padding: 2px 5px;
+    border-radius: 3px;
+    display: none;
+
+    font-size: 14px; /* Tamanho da fonte */
+	position: absolute;
+	bottom: 20px;
+}
+
+.clear-button {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  color: #666;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.clear-button:hover {
+  text-decoration: underline;
+}
+
+
+
+.opening-animation {
+  animation: slideFromLeft 0.5s ease forwards;
+}
+
+@keyframes slideFromLeft {
+  from {
+      transform: translateX(-100%);
+  }
+  to {
+      transform: translateX(0);
+  }
+}
+
+.slide-from-left {
+  animation: slideFromLeft 0.5s ease forwards;
+}
+
+
+@keyframes expandFromButton {
+  from {
+      opacity: 0;
+      transform: scale(0);
+  }
+  to {
+      opacity: 1;
+      transform: scale(1);
+  }
+}
+
+@keyframes contractToButton {
+  from {
+      opacity: 1;
+      transform: scale(1);
+  }
+  to {
+      opacity: 0;
+      transform: scale(0);
+  }
+}
+
+
+
+
+
+
+#imagemNaoEncontrado {
+    position: absolute;
+    top: 250px;
+    left: 170px;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    padding: 20px;
+    text-align: center;
+}
+
+#imagemNaoEncontrado img {
+  max-width: 100%;
+  height: auto;
+  margin-left: -50px;
+  margin-top: -70px;
+}
+
+
+
+#searchBox {
+  position: absolute;
+  display: none;
+  border: 1px solid #ccc;
+  padding: 8px;
+  background-color: white;
+}
+
+
+/* Estilo do botão quando o mouse passa por cima */
+.texto-interativo:hover {
+  color: rgb(231, 26, 180) !important; /* Altere a cor conforme necessário */
+}
+
+
+
+
+
+
+.tox-promotion {
+display: none;
+}
+
+
+/* limpara a busca */
+.search-container {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: 20px;
+}
+
+
+#searchInput {
+  width: 300px;
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  min-height: 50px;
+  background: white;
+  outline: none;
+  border: 1px solid #ccc;
+  margin-left: 20px;
+}
+
+
+
+#searchInput:focus {
+  outline: none; /* Remover a borda de foco */
+  border: 1px solid #377260; /* Adicionar uma borda cinza */
+}
+
+
+
+/* limpara a busca */
+
+#searchInput:focus {
+  outline: none; /* Remover a borda de foco */
+  border: 1px solid #377260; /* Adicionar uma borda cinza */
+}
+
+
+
+
+
+
+
+
+
+.search-container {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+}
+
+.highlight-green {
+  background-color: #90ee90;
+  border-radius: 6px;
+}
+
+.highlight-red {
+  background-color: #ff6666;
+  border-radius: 6px;
+}
+
+.search-container div[contenteditable="true"]:empty:before {
+  content: attr(data-placeholder);
+  color: grey;
+  pointer-events: none;
+  display: block; /* For Firefox */
+}
+
+
+
+
+  .clearRascunho {
+    display: block;
+    cursor: pointer;
+    position: relative;
+    margin-left: 2px;
+    font-size: 12px;
+    width:fit-content
+  }
+  
+  .clearRascunho:hover {
+    text-decoration: none;
+    color: rgb(236, 29, 29);
+  }
+
+
+  .clearSearch {
+    display: block; /* Este estilo será controlado via JavaScript conforme o estado do campo */
+    cursor: pointer;
+    position: absolute;
+    margin-left: 280px;
+    font-size: 12px;
+    width: fit-content;
+}
+
+.clearSearch:hover {
+    text-decoration: none;
+    color: rgb(236, 29, 29);
+}
+

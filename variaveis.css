@@ -1,0 +1,118 @@
+.h2-lista-variaveis {
+    cursor: pointer;
+    font: 12px 'SF Pro Display', sans-serif;
+    height: 17px;
+    margin-bottom: 8px;
+    margin-left: 20px;
+}
+
+.h2-lista-variaveis span {
+    padding: 2.7px;
+    border-radius: 5px;
+    background-color: #44766b;
+    color: #fff;
+    transition: background-color 0.3s ease;
+    z-index: 1;
+}
+
+.h2-lista-variaveis:hover span {
+    background-color: rgb(218, 146, 44);
+}
+
+  /* HOVER AO PASSAR O MOUSE */
+  .nome-variavel {
+    color: inherit; /* Manter a cor padrão do texto */
+    transition: box-shadow 0.3s ease-in-out; /* Adicionando transição ao box-shadow */
+  }
+  
+  .nome-variavel:hover {
+    box-shadow: 0 0 5px rgba(15, 182, 160, 0.7); /* Adicionando sombra ao passar o mouse */
+  }
+  
+
+
+.ul-lista-variaveis li .info-icon-container i::before {
+    opacity: 0; /* Por padrão, o ícone está oculto */
+    padding: 0;
+  }
+  
+  .ul-lista-variaveis li:hover .info-icon-container i::before {
+    opacity: 1; /* Torna o ícone visível quando o mouse está sobre o <li> */
+  }
+
+  .ul-lista-subcategoria {
+    list-style-type: none;
+    padding-left: 0;
+  }
+  
+  .ul-lista-variaveis li,
+  .details summary {
+    white-space: pre-line;
+  }
+
+
+  .nome-variavel.com-borda {
+    display: inline-block;
+    padding: 3px;
+    margin-bottom: 0px;
+    border: 1px solid #ccc;
+  }
+  
+
+    
+  /* Adicione uma classe específica para a regra que deseja sobrepor */
+  .ul-lista-variaveis li.ta span {
+    color: #4CAF50; /* Sua cor desejada */
+  }
+  
+/* Estilos para a lista */
+.ul-lista-variaveis {
+    display: none;
+    list-style-type: none;
+    padding: 0;
+    margin-top: 3px;
+    margin-bottom: 8px;
+    overflow-y: auto;
+    max-height: 340px;
+    font-family: 'Open Sans', sans-serif;
+    width: auto;
+    min-width: 150px;
+    inline-size: auto;
+    margin-left: 0;
+    overflow-x: hidden; /* Oculta a barra de rolagem horizontal */
+  }
+  
+  .ul-lista-variaveis li {
+    font-size: 9px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 8px;
+    margin-top: 1px;
+    position: relative;
+    margin-left: 20px;
+    overflow-wrap: anywhere;
+}
+  
+  
+  /* Estilos para a barra de rolagem */
+  .ul-lista-variaveis::-webkit-scrollbar {
+    width: 25px; /* Largura da barra de rolagem */
+  }
+  
+  /* Estilos para a barra de rolagem */
+  .ul-lista-variaveis::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Cor de fundo da barra de rolagem */
+    border-radius: 10px; /* Cantos arredondados */
+  }
+  
+  /* Estilos para a alça (thumb) da barra de rolagem */
+  .ul-lista-variaveis::-webkit-scrollbar-thumb {
+    background: #888; /* Cor da alça da barra de rolagem */
+    border-radius: 10px; /* Cantos arredondados */
+  }
+  
+  /* Estilos para a alça (thumb) da barra de rolagem quando estiver sendo arrastada */
+  .ul-lista-variaveis::-webkit-scrollbar-thumb:hover {
+    background: #555; /* Cor da alça da barra de rolagem quando estiver sendo arrastada */
+  }
+  

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<title>Textarea Flutuante</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+<style>
+    body { 
+        display: flex; 
+        flex-direction: column;
+        align-items: center; 
+        height: 100vh; 
+        margin: 0; 
+        background-color: #f0f4f8;
+        font-family: 'Roboto', sans-serif;
+    }
+    button {
+        font-size: 16px;
+        padding: 5px 10px;
+        color: #757575;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        transition: color 0.3s;
+    }
+    button:hover {
+        color: #505050;
+    }
+    #openButton {
+        background-color: #007BFF;
+        color: #ffffff;
+        padding: 10px 20px;
+        border-radius: 5px;
+        margin-bottom: 10px;
+    }
+    #moveButton {
+        position: absolute;
+        top: -19px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #007BFF;
+        color: #ffffff;
+        padding: 5px 10px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    #textareaContainer {
+        position: absolute;
+        display: none;
+        top: 150px;
+        left: 50px;
+        width: 820px;
+        opacity: 0;
+        transform: scale(0.95);
+        transition: opacity 0.5s, transform 0.5s;
+    }
+    textarea {
+        resize: both;
+        width: calc(100% - 20px);
+        height: calc(100% - 20px);
+        padding: 10px;
+        border: 2px solid #cccccc;
+        background-color: #f6f8d4;
+        font-family: 'Roboto', sans-serif;
+        font-size: 16px;
+        color: #333;
+        border-radius: 10px; 
+        margin: 10px;
+    }
+</style>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var openButton = document.getElementById('openButton');
+        var moveButton = document.getElementById('moveButton');
+        var container = document.getElementById('textareaContainer');
+        var textarea = container.querySelector('textarea');
+
+        function toggleTextarea() {
+            if (container.style.display === 'none' || container.style.display === '') {
+                container.style.display = 'block';
+                setTimeout(function() {
+                    container.style.opacity = '1';
+                    container.style.transform = 'scale(1)';
+                    textarea.focus(); // Focus after visible
+                }, 10);
+            } else {
+                setTimeout(function() {
+                    container.style.opacity = '0';
+                    container.style.transform = 'scale(0.95)';
+                    setTimeout(function() {
+                        container.style.display = 'none';
+                    }, 500); // Ensure transition is visible
+                }, 10);
+            }
+        }
+
+        openButton.addEventListener('click', function() {
+            toggleTextarea();
+            textarea.focus(); // Ensure focus after toggle
+        });
+
+        var isDragging = false;
+        var offsetX, offsetY;
+
+        moveButton.addEventListener('mousedown', function(e) {
+            isDragging = true;
+            offsetX = e.clientX - container.offsetLeft;
+            offsetY = e.clientY - container.offsetTop;
+            e.preventDefault(); // Add this to avoid unwanted drag effects in some browsers
+            textarea.focus(); // Focus the textarea when starting to move
+        });
+
+        document.addEventListener('mousemove', function(e) {
+            if (isDragging) {
+                var posX = e.clientX - offsetX;
+                var posY = e.clientY - offsetY;
+                container.style.left = posX + 'px';
+                container.style.top = posY + 'px';
+            }
+        });
+
+        document.addEventListener('mouseup', function() {
+            isDragging = false;
+        });
+
+        textarea.addEventListener('click', function() {
+            textarea.focus(); // Ensure focus when clicking inside the textarea
+        });
+    });
+</script>
+</head>
+<body>
+<button id="openButton">Abrir/Fechar Textarea</button>
+<div id="textareaContainer">
+    <button id="moveButton">Mover</button>
+    <textarea></textarea>
+</div>
+</body>
+</html>
